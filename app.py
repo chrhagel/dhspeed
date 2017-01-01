@@ -15,3 +15,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
+
+
+# https://github.com/datademofun/heroku-basic-flask/blob/master/README.md

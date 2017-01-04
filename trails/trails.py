@@ -12,15 +12,14 @@ block_blob_service = BlockBlobService(account_name=account, account_key=account_
 azure_container = 'rides'
 azure_path = 'data/'
 azure_saved_path = azure_path + 'saved/'
-# temp_path = 'trails/tmp/'
-temp_path = 'tmp/'
+temp_path = 'trails/tmp/'
 # ##########################
 
 def get_rides():
     file = 'table_rides.csv'
     try:
         rides = open_local_file(file)
-    except Exception as e:
+    except FileNotFoundError:
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         rides = open_local_file(file)
         
@@ -45,7 +44,7 @@ def get_ride_and_json(id):
         # ride data # json_path = 'trails/data/id_' + str(id) + '_only_changing_mph.json'
         with open (temp_path + file, "r") as ride_file:
             data = ride_file.read()    
-    except Exception as e:
+    except FileNotFoundError:
         # get file from azure blob
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         # ride data # json_path = 'trails/data/id_' + str(id) + '_only_changing_mph.json'
@@ -71,7 +70,7 @@ def get_ride_as_dataframe(ride_id):
 
     try:
         ride = pd.read_csv(temp_path + file)
-    except Exception as e:
+    except FileNotFoundError:
         # get file from azure blob
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         ride = pd.read_csv(temp_path + file)
@@ -88,7 +87,7 @@ def get_calibrated_subset(trail_id, org_start_point, org_end_point):
 
     try:
         ride = pd.read_csv(temp_path + file)
-    except Exception as e:
+    except FileNotFoundError:
         # get file from azure blob
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         ride = pd.read_csv(temp_path + file)

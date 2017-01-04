@@ -1,5 +1,6 @@
+azure.storage
 Flask
 gunicorn
 numpy
 pandas
-azure.storage
+unicodecsv

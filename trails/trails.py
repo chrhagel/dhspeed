@@ -17,11 +17,11 @@ temp_path = 'trails/tmp/'
 
 def get_rides():
     file = 'table_rides.csv'
-    try:
-        rides = open_local_file(file)
-    except FileNotFoundError:
-        block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
-        rides = open_local_file(file)
+    # try:
+    #     rides = open_local_file(file)
+    # except FileNotFoundError:
+    block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
+    rides = open_local_file(file)
         
     return rides
 

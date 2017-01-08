@@ -1,0 +1,7 @@
+id,name,date,condition,daylight,trailsystem,start_lat,start_lon
+1,"Tokul East with Mark, Mike, and Nate",11/20/16,Muddy,TRUE,Tokul East,47.567696,-121.865349
+2,Soaring Eagle with Ron,11/24/16,Muddy,TRUE,Soaring Eagle,47.61171722,-121.9912338
+3,Tolt Mac with Mark,11/27/16,Muddy,TRUE,Tolt Mac,47.64068985,-121.9166107
+4,Soaring Eagle with Nate  -cold,12/8/16,Cold and Dry,TRUE,Soaring Eagle,47.61171722,-121.9912338
+5,Cherry Valley TNR,12/15/16,Cold and Dry,FALSE,Cherry Valley,47.74572372,-121.9081345
+6,Tokul TNR Daytime ,12/22/16,Cold and Dry,TRUE,Tokul East,47.567696,-121.865349

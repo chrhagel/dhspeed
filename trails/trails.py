@@ -7,8 +7,8 @@ from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
 
 # ##########################
-account = os.environ.get('account')
-account_key = os.environ.get('account_key')
+account = os.environ.get('ACCOUNT')
+account_key = os.environ.get('ACCOUNT_KEY')
 block_blob_service = BlockBlobService(account_name=account, account_key=account_key)
 azure_container = 'rides'
 azure_path = 'data/'
@@ -24,8 +24,6 @@ def get_rides():
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         rides = open_local_file(file)
     
-    print(account)
-
     return rides
 
 

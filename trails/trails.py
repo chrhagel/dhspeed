@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import unicodecsv
@@ -6,8 +7,8 @@ from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
 
 # ##########################
-account = 'dhspeed'
-account_key = 'gePaxovANJMYSzIEnIWCD0aJPbbeogEjC8NfuJwvuAhKMsaOMwZbeWEr1C4hMqpunca/obB4LlwPlTqfr4EZgg=='
+account = os.environ.get('account')
+account_key = os.environ.get('account_key')
 block_blob_service = BlockBlobService(account_name=account, account_key=account_key)
 azure_container = 'rides'
 azure_path = 'data/'
@@ -22,7 +23,9 @@ def get_rides():
     except FileNotFoundError:
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         rides = open_local_file(file)
-        
+    
+    print(account)
+
     return rides
 
 

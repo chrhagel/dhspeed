@@ -9,9 +9,10 @@ from azure.storage.table import TableService, Entity
 from azure.common import AzureHttpError, AzureConflictHttpError, AzureMissingResourceHttpError
 
 # ##########################
-account = os.environ.get('ACCOUNT')
+account_name = os.environ.get('ACCOUNT')
 account_key = os.environ.get('ACCOUNT_KEY')
-block_blob_service = BlockBlobService(account_name=account, account_key=account_key)
+block_blob_service = BlockBlobService(account_name=account_name, account_key=account_key)
+table_service = TableService(account_name=account_name, account_key=account_key)
 azure_container = 'rides'
 azure_path = 'data/'
 azure_saved_path = azure_path + 'saved/'
@@ -147,7 +148,6 @@ def save_trail(ride_id, trail_name, start_point, end_point):
         content_settings = ContentSettings(content_type='text/csv'))
 
     # Associate Run with Ride
-    table_service = TableService(account_name=account_name, account_key=account_key)
     run = {'PartitionKey': file, 'RowKey': str(ride_id), 'name': trail_name, 'duration': duration}
     table_service.insert_entity('runs', run)
 

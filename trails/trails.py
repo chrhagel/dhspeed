@@ -5,6 +5,8 @@ import unicodecsv
 import datetime as dt
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import ContentSettings
+from azure.storage.table import TableService, Entity
+from azure.common import AzureHttpError, AzureConflictHttpError, AzureMissingResourceHttpError
 
 # ##########################
 account = os.environ.get('ACCOUNT')
@@ -19,7 +21,7 @@ temp_path = ''
 def get_rides():
     file = 'table_rides.csv'
     try:
-        rides = open_local_file(file)
+        rides = open_local_file(file) 
     except FileNotFoundError:
         block_blob_service.get_blob_to_path(azure_container, azure_path + file, temp_path + file)
         rides = open_local_file(file)
@@ -143,6 +145,11 @@ def save_trail(ride_id, trail_name, start_point, end_point):
         azure_saved_path + file,
         temp_path + file,
         content_settings = ContentSettings(content_type='text/csv'))
+
+    # Associate Run with Ride
+    table_service = TableService(account_name=account_name, account_key=account_key)
+    run = {'PartitionKey': file, 'RowKey': str(ride_id), 'name': trail_name, 'duration': duration}
+    table_service.insert_entity('runs', run)
 
     return True
 

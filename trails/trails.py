@@ -29,6 +29,13 @@ def get_rides():
     
     return rides
 
+def get_runs():
+    runs = table_service.query_entities('runs')
+    for r in runs:
+        print (r.RowKey)
+
+    return runs
+
 
 def open_local_file(file):
     ''' Using this to save traffic and speed everythign up '''

@@ -11,9 +11,10 @@ app = Flask(__name__)
 def index():
     ''' Get rides from db. send to index template. show as list. '''
     rides = tr.get_rides()
+    runs = tr.get_runs()
 
     return render_template('index.html', 
-        rides = rides)
+        rides = rides, runs = runs)
 
 
 

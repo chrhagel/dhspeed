@@ -56,7 +56,13 @@
                   <td><a href="ride.html/{{ ride.id }}">{{ ride.name }}</a></td>
                   <td>{{ ride.trailsystem }}</td>
                   <td>{{ ride.rider }}</td>
-                  <td>tbd</td>
+                  <td>
+                  {% for run in runs %}
+                    {% if run.RowKey == ride.id %}
+                      {{ run.name }} | {{ run.duration }} <br/>
+                    {% endif %}
+                  {% endfor %}    
+                  </td>
                 </tr>
               {% endfor %}
               </tbody>

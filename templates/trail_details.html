@@ -350,11 +350,22 @@
             // Update the blue line on the map with a subset of the base array equal to the slider values
             poly_crop.setPath(base_path_array.slice(slider_crop_val[0], slider_crop_val[1]));
 
+
+            // slider values for reuse
+            var slider_start_val = Math.floor(slider_crop_val[0]);
+            var slider_end_val = Math.floor(slider_crop_val[1]);
+
             // Get the duration of the selected section and update the HTML.
-            trail_duration = CalculateDuration(Math.floor(slider_crop_val[0]), Math.floor(slider_crop_val[1]));
+            trail_duration = CalculateDuration(slider_start_val, slider_end_val);
             document.getElementById("duration").innerHTML = trail_duration;
-            document.getElementById("startpoint").innerHTML = Math.floor(slider_crop_val[0]);
-            document.getElementById("endpoint").innerHTML = Math.floor(slider_crop_val[1]);
+
+            // showing the start point for analysis (debug by us)
+            var trail_start_row = traildata[slider_start_val]['RowNum'];
+            document.getElementById("startpoint").innerHTML = trail_start_row;
+            
+            // showing the end point for analysis (debug by us)
+            var trail_end_row = traildata[slider_end_val]['RowNum'];
+            document.getElementById("endpoint").innerHTML = trail_end_row;
         });
 
         // Set the slider handles to the trail points we originally had

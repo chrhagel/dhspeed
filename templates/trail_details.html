@@ -55,7 +55,8 @@
           </div>
           <div class="col-md-4">
             <p>Duration: <span id="duration"></span></p>
-            
+            <p>Start point: <span id="startpoint"></span></p>
+            <p>End Point: <span id="endpoint"></span></p>
             <br/><br/>
 
             <button type="button" class="btn btn-primary" onclick="SaveTrail()">Save Trail</button>
@@ -352,6 +353,8 @@
             // Get the duration of the selected section and update the HTML.
             trail_duration = CalculateDuration(Math.floor(slider_crop_val[0]), Math.floor(slider_crop_val[1]));
             document.getElementById("duration").innerHTML = trail_duration;
+            document.getElementById("startpoint").innerHTML = Math.floor(slider_crop_val[0]);
+            document.getElementById("endpoint").innerHTML = Math.floor(slider_crop_val[1]);
         });
 
         // Set the slider handles to the trail points we originally had
